@@ -13,6 +13,10 @@ class Author(models.Model):
     first_name = models.CharField(verbose_name="First Name", max_length=100)
     last_name = models.CharField(verbose_name="Last Name", max_length=100)
 
+    class Meta:
+        verbose_name = "Autorius"
+        verbose_name_plural = "Autoriai"
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
@@ -23,6 +27,11 @@ class Book(models.Model):
     summary = models.TextField(verbose_name="Summary", max_length=1000, help_text="Short Book summary")
     genre = models.ManyToManyField(to='Genre', verbose_name="Genres")
     isbn = models.CharField(verbose_name="ISBN", max_length=13)
+
+    def display_genre(self):
+        return ", ".join(genre.name for genre in self.genre.all())
+
+    display_genre.short_description = "Genres"
 
     def __str__(self):
         return self.title
