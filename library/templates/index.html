@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Mūsų biblioteka</title>
-</head>
-<body>
-<h1>Dainavos biblioteka</h1>
-<p>Sveiki atvykę į mūsų bibliotekos svetainę!</p>
+{% extends "base.html" %}
 
+
+
+{% block content %}
 <h2>Statistika</h2>
 <p>Turime knygų: <b>{{num_books}}</b></p>
 <p>Turime autorių: <b>{{num_authors}}</b></p>
+{% endblock %}
 
-
-</body>
-</html>
