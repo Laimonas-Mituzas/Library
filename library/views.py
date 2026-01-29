@@ -1,4 +1,26 @@
 from django.shortcuts import render
 
+from .models import Book, Author, Genre, BookInstance
+
+
 def index(request):
-    return render(request, template_name="index.html")
+
+    # Suskaičiuokime keletą pagrindinių objektų
+    # num_books = Book.objects.count()
+    # num_instances = BookInstance.objects.count()
+
+    # Laisvos knygos (tos, kurios turi statusą 'a')
+    # num_instances_available = BookInstance.objects.filter(status='a').count()
+
+    # Kiek yra autorių
+    # num_authors = Author.objects.count()
+
+    context = {
+        'num_books': Book.objects.count(),
+        'num_instances': BookInstance.objects.count(),
+        'num_instances_available': BookInstance.objects.filter(status='a').count(),
+        'num_authors': Author.objects.count(),
+
+    }
+
+    return render(request, template_name="index.html", context=context)
