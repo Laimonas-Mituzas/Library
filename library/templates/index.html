@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}
-Dainavos biblioteka
-{% endblock %}
+{% block title %} Dainavos biblioteka {% endblock %}
+
+{% block titleh1 %} Dainavos biblioteka {% endblock %}
 
 {% block content %}
-<h2>Statistika</h2>
-<p>Turime knygų: <b>{{num_books}}</b></p>
-<p>Turime autorių: <b>{{num_authors}}</b></p>
+  <h1>Šiuo metu turime:</h1>
+  <ul>
+    <li><strong>Knygų:</strong> {{ num_books }}</li>
+    <li><strong>Egzempliorių:</strong> {{ num_instances }}</li>
+    <li><strong>Laisvų egzempliorių:</strong> {{ num_instances_available }}</li>
+    <li><strong>Autorių:</strong> {{ num_authors }}</li>
+  </ul>
 {% endblock %}
-

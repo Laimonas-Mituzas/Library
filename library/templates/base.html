@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="p-5 bg-primary text-white text-center">
-    <h1>daianvos</h1>
+    <h1>{% block titleh1 %}{% endblock %}</h1>
     <p>Skaitykite ir išmanykite...</p>
 </div>
 
@@ -25,7 +25,7 @@
     <div class="collapse navbar-collapse" id="mynavbar">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'index' %}}">Pradžia</a>
+          <a class="nav-link" href="{% url 'index' %}">Pradžia</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="javascript:void(0)">Link</a>
@@ -45,7 +45,7 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-sm">
-            {% block "content" %}
+            {% block content %}
 
             {% endblock %}
         </div>
