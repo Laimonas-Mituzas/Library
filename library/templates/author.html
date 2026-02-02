@@ -4,9 +4,13 @@
 
 {% block content %}
 <h1>Autorius</h1>
-<p>  Vardas: {{author.first_name}} </p>
-<p>  Pavardė: {{author.last_name}} </p>
+<p>  Vardas: <strong>{{author.first_name}}</strong> </p>
+<p>  Pavardė: <strong>{{author.last_name}}</strong> </p>
 <p>  {{author.description}} </p>
 
+<h2>Autoriaus knygos</h2>
+{% for book in author.books.all %}
+<p> {{ book.title }}</p>
+{% endfor %}
 
 {% endblock %}
