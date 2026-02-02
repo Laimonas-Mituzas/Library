@@ -16,6 +16,7 @@ class Genre(models.Model):
 class Author(models.Model):
     first_name = models.CharField(verbose_name="First Name", max_length=100)
     last_name = models.CharField(verbose_name="Last Name", max_length=100)
+    description = models.TextField(verbose_name="Description", max_length=3000, default="")
 
     class Meta:
         verbose_name = "Autorius"

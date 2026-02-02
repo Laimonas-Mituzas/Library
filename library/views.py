@@ -24,3 +24,15 @@ def index(request):
     }
 
     return render(request, template_name="index.html", context=context)
+
+def authors(request):
+    context = {
+        'authors': Author.objects.all(),
+    }
+    return render(request, template_name="authors.html", context=context)
+
+def author(request, author_id):
+    context = {
+        'author': Author.objects.get(id=author_id),
+    }
+    return render(request, template_name="author.html", context=context)
