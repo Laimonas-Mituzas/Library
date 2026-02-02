@@ -33,6 +33,7 @@ def authors(request):
 def author(request, author_id):
     context = {
         'author': Author.objects.get(id=author_id),
+        # 'author': Author.objects.get(id=first_name),
     }
     return render(request, template_name="author.html", context=context)
 

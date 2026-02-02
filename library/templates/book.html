@@ -2,11 +2,30 @@
 
 {% block title %} Knyga {% endblock %}
 
+{% block title_h1 %}
+<h1>Knyga</h1>
+{% endblock %}
+
 {% block content %}
 <p>  Pavadinimas: <strong>{{book.title}}</strong> </p>
 <p>  Autorius: <strong>{{book.author}}</strong> </p>
 <p>  ISBN: <strong>{{book.isbn}}</strong> </p>
 <p>  Žanras <strong>{{book.display_genre}}</strong> </p>
-<p>  {{book.description}} </p>
+<p>  {{book.summary}} </p>
+
+<h3>Kopijos:</h3>
+{% if book.instances.all %}
+    {% for copy in book.instances.all %}
+    <hr>
+<p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 't' %}text-danger{% elif copy.status == 'r' %}text-warning{% endif %}">
+ <strong>{{ copy.get_status_display }}</strong></p>
+    {% if copy.due_back %}
+    <p><strong>Bus gražinta: </strong>{{ copy.due_back }}</p>
+    {% endif %}
+    <small class="text-muted"><strong>ID: </strong>{{ copy.uuid }}</small>
+    {% endfor %}
+    {% else %}
+    <p>Šios knygos kopijų neturime</p>
+    {% endif %}
 
 {% endblock %}
