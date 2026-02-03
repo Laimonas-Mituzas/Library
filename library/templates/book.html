@@ -7,6 +7,14 @@
 {% endblock %}
 
 {% block content %}
+{% load static %}
+
+{% if book.cover %}
+<img class="card-img-top mb-3" style="max-width: 20%" src="{{ book.cover.url }}">
+{% else %}
+    <img class="card-img-top mb-3" style="max-width: 20%" src="{% static 'img/no-image.jpg' %}">
+{% endif %}
+
 <p>  Pavadinimas: <strong>{{book.title}}</strong> </p>
 <p>  Autorius: <strong>{{book.author}}</strong> </p>
 <p>  ISBN: <strong>{{book.isbn}}</strong> </p>
