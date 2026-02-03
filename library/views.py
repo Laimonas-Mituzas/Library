@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Book, Author, Genre, BookInstance
 from django.views import generic
+from django.core.paginator import Paginator
 
 def index(request):
 
@@ -25,6 +26,10 @@ def index(request):
     return render(request, template_name="index.html", context=context)
 
 def authors(request):
+    authors = Author.objects.all()
+    paginator = Paginator(authors, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
         'authors': Author.objects.all(),
     }
@@ -41,8 +46,11 @@ class BookListView(generic.ListView):
     model = Book
     template_name = "books.html"
     context_object_name = "books"
+    paginate_by = 3
 
 class BookDetailView(generic.DetailView):
     model = Book
     template_name = "book.html"
     context_object_name = "book"
+
+
