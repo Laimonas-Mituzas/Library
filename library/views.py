@@ -16,11 +16,16 @@ def index(request):
     # Kiek yra autorių
     # num_authors = Author.objects.count()
 
+    # SESIJOMS Papildome kintamuoju num_visits, įkeliame jį į kontekstą.
+    num_visits = request.session.get('num_visits', 1)
+    request.session['num_visits'] = num_visits + 1
+
     context = {
         'num_books': Book.objects.count(),
         'num_instances': BookInstance.objects.count(),
         'num_instances_available': BookInstance.objects.filter(status='a').count(),
         'num_authors': Author.objects.count(),
+        'num_visits': num_visits,
 
     }
 
