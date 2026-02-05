@@ -36,9 +36,9 @@ def authors(request):
     authors = Author.objects.all()
     paginator = Paginator(authors, 3)
     page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    paged_authors= paginator.get_page(page_number)
     context = {
-        'authors': Author.objects.all(),
+        'authors': paged_authors,
     }
     return render(request, template_name="authors.html", context=context)
 
