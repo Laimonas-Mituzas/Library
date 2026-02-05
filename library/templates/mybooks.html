@@ -8,11 +8,11 @@
 
 {% block content %}
 {% load static %}
-<h1>Turimos knygos</h1>
+<h1>Tavo skaitomos ir laukiamos knygos</h1>
 <p></p>
 <div class="row">
   {% for instance in instances %}
-   <p class="{% if instance.is_overdue %}text-danger{% endif %}">{{ instance.book }} ({{ instance.uuid }})</p>
+   <p class="{% if instance.is_overdue %}text-danger{% endif %}">{{ instance.book }} ({{instance.status}} {{ instance.due_back }})</p>
   {% endfor %}
 
 
