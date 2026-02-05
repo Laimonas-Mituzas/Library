@@ -7,14 +7,14 @@
 
 {% endblock %}
 
-{% block "content" %}
+{% block content %}
 
 <h1>Knygos, rastos pagal paiešką "{{ query }}":</h1>
 <br>
 
-{% if books %}
+{% if book_search_results %}
 
-{% for book in books %}
+{% for book in book_search_results %}
 <p><a href="{% url 'book' book.pk %}">{{ book }}</a></p>
 {% endfor %}
 {% else %}
@@ -22,10 +22,12 @@
 {% endif %}
 <h1>Autoriai, rasti pagal paiešką "{{ query }}":</h1>
 <br>
-{% if authors %}
-{% for author in authors %}
+
+{% if author_search_results %}
+{% for author in author_search_results %}
 <p><a href="{% url 'author' author.pk %}">{{ author }}</a></p>
 {% endfor %}
+
 
 {% else %}
 

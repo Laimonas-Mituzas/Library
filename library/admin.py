@@ -25,7 +25,7 @@ class BookInstanceAdmin(admin.ModelAdmin):
 
     fieldsets = [
             ('General', {'fields': ('uuid', 'book')}),
-            ('Availability', {'fields': ('status', 'due_back')}),
+            ('Availability', {'fields': ('status', 'due_back', 'reader')}),
         ]
 
 
