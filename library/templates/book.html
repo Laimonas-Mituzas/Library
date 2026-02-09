@@ -21,6 +21,21 @@
 <p>  Žanras <strong>{{book.display_genre}}</strong> </p>
 <p>  {{book.summary}} </p>
 
+
+<h2>Atsiliepimai:</h2>
+<br/>
+{% if book.reviews.all %}
+{% for review in book.reviews.all %}
+<p><strong>{{ review.reviewer }}</strong>, <em>{{ review.date_created }}</em></p>
+<p>{{ review.content }}</p>
+<hr>
+{% endfor %}
+{% else %}
+<p>Komentarų nėra</p>
+{% endif %}
+
+
+
 <h3>Kopijos:</h3>
 {% if book.instances.all %}
     {% for copy in book.instances.all %}

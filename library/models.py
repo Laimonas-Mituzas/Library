@@ -80,3 +80,19 @@ class BookInstance(models.Model):
 
     def __str__(self):
         return str(self.uuid)
+
+
+class BookReview(models.Model):
+    book = models.ForeignKey(to="Book",
+                             verbose_name="Book",
+                             on_delete=models.SET_NULL,
+                             null=True, blank=True,
+                             related_name="reviews")
+    reviewer = models.ForeignKey(to=User, verbose_name="Reviewer", on_delete=models.SET_NULL, null=True, blank=True)
+    date_created = models.DateTimeField(verbose_name="Date Created", auto_now_add=True)
+    content = models.TextField(verbose_name="Content", max_length=2000)
+
+    class Meta:
+        verbose_name = "Book Review"
+        verbose_name_plural = 'Book Reviews'
+        ordering = ['-date_created']

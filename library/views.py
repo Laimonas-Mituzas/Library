@@ -3,7 +3,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 from django.urls import reverse_lazy
-
 from .models import Book, Author, Genre, BookInstance
 from django.views import generic
 from django.core.paginator import Paginator
