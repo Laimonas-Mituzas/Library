@@ -1,5 +1,9 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
+from django.urls import reverse_lazy
+
 from .models import Book, Author, Genre, BookInstance
 from django.views import generic
 from django.core.paginator import Paginator
@@ -87,4 +91,9 @@ class MyBookInstanceListView(LoginRequiredMixin, generic.ListView):
         return BookInstance.objects.filter(reader=self.request.user)
 
 
+# registracijos forma views neturi model
+class SignUpView(generic.CreateView):
+    form_class = UserCreationForm
+    template_name = "signup.html"
+    success_url = reverse_lazy('login')
 
