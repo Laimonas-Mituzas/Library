@@ -18,7 +18,7 @@ class Genre(models.Model):
 
 
 class CustomUser(AbstractUser):
-    photo = models.ImageField(default="profile_pics/no-image.jpg", upload_to="profile_pics")
+    photo = models.ImageField(upload_to="profile_pics", null=True, blank=True)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

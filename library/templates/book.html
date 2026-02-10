@@ -26,6 +26,9 @@
 <h2>Atsiliepimai:</h2>
 <br/>
 {% for review in book.reviews.all %}
+{% if review.reviewer.photo %}
+    <img src="{{ review.reviewer.photo.url }}" class="rounded-circle" style="width: 30px">
+    {% endif %}
 <p><strong>{{ review.reviewer }}</strong>, <em>{{ review.date_created }}</em></p>
 <p>{{ review.content }}</p>
 <hr>
