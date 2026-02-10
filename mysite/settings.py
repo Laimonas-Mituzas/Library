@@ -158,3 +158,5 @@ TINYMCE_DEFAULT_CONFIG = {
     'menubar': True,
     'statusbar': True,
     }
+
+AUTH_USER_MODEL = 'library.CustomUser'

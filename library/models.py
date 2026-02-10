@@ -1,8 +1,9 @@
 from django.db import models
 import uuid
-from django.contrib.auth.models import User
 from django.utils import timezone
 from tinymce.models import HTMLField
+from django.contrib.auth.models import AbstractUser
+from PIL import Image
 
 
 class Genre(models.Model):
@@ -14,6 +15,23 @@ class Genre(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class CustomUser(AbstractUser):
+    photo = models.ImageField(default="profile_pics/no-image.jpg", upload_to="profile_pics")
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.photo:
+            img = Image.open(self.photo.path)
+            min_side = min(img.width, img.height)
+            left = (img.width - min_side) // 2
+            top = (img.height - min_side) // 2
+            right = left + min_side
+            bottom = top + min_side
+            img = img.crop((left, top, right, bottom))
+            img = img.resize((300, 300), Image.LANCZOS)
+            img.save(self.photo.path)
 
 
 class Author(models.Model):
@@ -64,7 +82,7 @@ class BookInstance(models.Model):
                              blank=True,
                              related_name="instances")
     due_back = models.DateField(verbose_name="Available On", null=True, blank=True)
-    reader = models.ForeignKey(to=User, verbose_name="Reader", on_delete=models.SET_NULL, null=True, blank=True)
+    reader = models.ForeignKey(to="library.CustomUser", verbose_name="Reader", on_delete=models.SET_NULL, null=True, blank=True)
 
     LOAN_STATUS = (
     ('d', 'Administrated'),
@@ -88,7 +106,7 @@ class BookReview(models.Model):
                              on_delete=models.SET_NULL,
                              null=True, blank=True,
                              related_name="reviews")
-    reviewer = models.ForeignKey(to=User, verbose_name="Reviewer", on_delete=models.SET_NULL, null=True, blank=True)
+    reviewer = models.ForeignKey(to="library.CustomUser", verbose_name="Reviewer", on_delete=models.SET_NULL, null=True, blank=True)
     date_created = models.DateTimeField(verbose_name="Date Created", auto_now_add=True)
     content = models.TextField(verbose_name="Content", max_length=2000)
 

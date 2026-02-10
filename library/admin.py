@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Author, Genre, Book, BookInstance, BookReview
+from .models import Author, Genre, Book, BookInstance, BookReview, CustomUser
+from django.contrib.auth.admin import UserAdmin
 
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name', 'display_books']
@@ -36,9 +37,16 @@ class BookReviewAdmin(admin.ModelAdmin):
     model = BookReview
     list_display = ['book', 'date_created', 'reviewer', 'content']
 
+class CustomUserAdmin(UserAdmin):
+    fieldsets = UserAdmin.fieldsets + (
+        ('Additional Info', {'fields': ('photo',)}),
+    )
+
+
 # Admin modeliai registruojami cia
 admin.site.register(Book, BookAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Genre)
 admin.site.register(BookInstance, BookInstanceAdmin)
 admin.site.register(BookReview, BookReviewAdmin)
+admin.site.register(CustomUser, CustomUserAdmin)
