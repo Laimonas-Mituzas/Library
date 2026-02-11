@@ -9,7 +9,7 @@ from .models import Book, Author, Genre, BookInstance
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
-from .forms import BookReviewForm, UserChangeForm, CustomUserCreateForm
+from .forms import BookReviewForm, UserChangeForm, CustomUserCreateForm, InstanceCreateUpdateForm
 
 def index(request):
 
@@ -144,6 +144,17 @@ class BookInstanceDetailView(LoginRequiredMixin, UserPassesTestMixin, generic.De
     model = BookInstance
     context_object_name = "instance"
     template_name = "instance.html"
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class BookInstanceCreateView(LoginRequiredMixin, UserPassesTestMixin, generic.CreateView):
+    model = BookInstance
+    template_name = "instance_form.html"
+    form_class = InstanceCreateUpdateForm
+    # fields = ['book', 'reader', 'due_back', 'status']
+    success_url = reverse_lazy('instances')
 
     def test_func(self):
         return self.request.user.is_staff

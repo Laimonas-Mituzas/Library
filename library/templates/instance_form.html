@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %} DEgzemplioriaus kūrimas/redagavimas {% endblock %}
+
+{% block title_h1 %}
+<h1>Egzemplioriaus kūrimas/redagavimas</h1>
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="row">
+<form method="POST">
+    {% csrf_token %}
+    {% load crispy_forms_tags %}
+    <legend class="border-bottom mb-4">Knygos Egzemplioriaus kūrimas/redagavimas</legend>
+        {{ form | crispy }}
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Išsaugoti</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

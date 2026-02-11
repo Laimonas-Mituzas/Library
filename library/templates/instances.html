@@ -10,6 +10,11 @@
 {% load static %}
 <h1>Knygų egzemplioriu administravimas</h1>
 <p></p>
+
+<div class="row">
+    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'instance_create' %}">Naujas egzempliorius</a>
+</div>
+<br/>
 <div class="row">
     {% for instance in instances %}
 
