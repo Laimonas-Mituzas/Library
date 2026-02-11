@@ -114,3 +114,5 @@ class BookReview(models.Model):
         verbose_name = "Book Review"
         verbose_name_plural = 'Book Reviews'
         ordering = ['-date_created']
+
+
