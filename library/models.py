@@ -4,14 +4,15 @@ from django.utils import timezone
 from tinymce.models import HTMLField
 from django.contrib.auth.models import AbstractUser
 from PIL import Image
+from django.utils.translation import gettext_lazy as _
 
 
 class Genre(models.Model):
-    name = models.CharField(verbose_name="Name", max_length=200)
+    name = models.CharField(verbose_name=_("Name"), max_length=200)
 
     class Meta:
-        verbose_name = "Genre"
-        verbose_name_plural = "Genres"
+        verbose_name = _("Genre")
+        verbose_name_plural = _("Genres")
 
     def __str__(self):
         return self.name
@@ -35,40 +36,40 @@ class CustomUser(AbstractUser):
 
 
 class Author(models.Model):
-    first_name = models.CharField(verbose_name="First Name", max_length=100)
-    last_name = models.CharField(verbose_name="Last Name", max_length=100)
-    description = HTMLField(verbose_name="Description", max_length=4000, default="")
+    first_name = models.CharField(verbose_name=_("First Name"), max_length=100)
+    last_name = models.CharField(verbose_name=_("Last Name"), max_length=100)
+    description = HTMLField(verbose_name=_("Description"), max_length=4000, default="")
 
     class Meta:
-        verbose_name = "Autorius"
-        verbose_name_plural = "Autoriai"
+        verbose_name = _("Author")
+        verbose_name_plural = _("Authors")
 
     def display_books(self):
         return ', '.join(book.title for book in self.books.all())
 
-    display_books.short_description = "Books"
+    display_books.short_description = _("Books")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
 
 class Book(models.Model):
-    title = models.CharField(verbose_name="Title", max_length=200)
+    title = models.CharField(verbose_name=_("Title"), max_length=200)
     author = models.ForeignKey(to="Author",
-                               verbose_name="Author",
+                               verbose_name=_("Author"),
                                on_delete=models.SET_NULL,
                                null=True,
                                blank=True,
                                related_name="books")
-    summary = models.TextField(verbose_name="Summary", max_length=1000, help_text="Short Book summary")
+    summary = models.TextField(verbose_name=_("Summary"), max_length=1000, help_text=_("Short Book summary"))
     genre = models.ManyToManyField(to='Genre', verbose_name="Genres")
     isbn = models.CharField(verbose_name="ISBN", max_length=13)
-    cover = models.ImageField(verbose_name="Cover Image", upload_to="covers", blank=True, null=True)
+    cover = models.ImageField(verbose_name=_("Cover Image"), upload_to="covers", blank=True, null=True)
 
     def display_genre(self):
         return ", ".join(genre.name for genre in self.genre.all())
 
-    display_genre.short_description = "Genre"
+    display_genre.short_description = _("Genre")
 
     def __str__(self):
         return self.title
@@ -76,13 +77,13 @@ class Book(models.Model):
 class BookInstance(models.Model):
     uuid = models.UUIDField(verbose_name="ID", default=uuid.uuid4())
     book = models.ForeignKey(to="Book",
-                             verbose_name="Book",
+                             verbose_name=_("Book"),
                              on_delete=models.SET_NULL,
                              null=True,
                              blank=True,
                              related_name="instances")
-    due_back = models.DateField(verbose_name="Available On", null=True, blank=True)
-    reader = models.ForeignKey(to="library.CustomUser", verbose_name="Reader", on_delete=models.SET_NULL, null=True, blank=True)
+    due_back = models.DateField(verbose_name=_("Available On"), null=True, blank=True)
+    reader = models.ForeignKey(to="library.CustomUser", verbose_name=_("Reader"), on_delete=models.SET_NULL, null=True, blank=True)
 
     LOAN_STATUS = (
     ('d', 'Administrated'),

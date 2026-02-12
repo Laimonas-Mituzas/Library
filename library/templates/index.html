@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block title %} Dainavos biblioteka {% endblock %}
 
 {% block title_h1 %}
@@ -10,14 +10,14 @@
 
 
 {% block content %}
-  <h1>Šiuo metu turime:</h1>
+  <h1>{% trans "Today we have:" %} </h1>
   <ul>
-    <li><a class="nav-link" href="{% url 'books' %}"><strong>Knygų:</strong> {{ num_books }}</a></li>
-    <li><strong>Egzempliorių:</strong> {{ num_instances }}</li>
-    <li><strong>Laisvų egzempliorių:</strong> {{ num_instances_available }}</li>
-    <li><a class="nav-link" href="{% url 'authors' %}"><strong>Autorių:</strong> {{ num_authors }}</a></li>
+    <li><a class="nav-link" href="{% url 'books' %}"><strong>{% trans "Books:" %}</strong> {{ num_books }}</a></li>
+    <li><strong>{% trans "Books copies:" %}</strong> {{ num_instances }}</li>
+    <li><strong>{% trans "Books available:" %}</strong> {{ num_instances_available }}</li>
+    <li><a class="nav-link" href="{% url 'authors' %}"><strong>{% trans "Authors:" %}</strong> {{ num_authors }}</a></li>
   </ul>
 
-<p>Apsilankymų skaičius: {{ num_visits }}-ą kartą.</p>
+<p>{% trans "Times visited" %} {{ num_visits }}</p>
 
 {% endblock %}
